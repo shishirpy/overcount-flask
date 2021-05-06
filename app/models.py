@@ -13,13 +13,13 @@ class Count(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f"""<author_id: {self.author_id}>,
-                 <inf_count: {self.inf_count}>,
-                 <fatality_count: {self.fatality_count}>,
-                 <long: {self.long}>,
-                 <lat: {self.lat}>
-                 <timestamp: {self.timestamp}>
-                 """
+        return f"<author_id: {self.author_id}>,\
+<inf_count: {self.inf_count}>,\
+<fatality_count: {self.fatality_count}>,\
+<long: {self.long}>,\
+<lat: {self.lat}>,\
+<timestamp: {self.timestamp}>\
+"
 
     def to_dict(self):
         return {
