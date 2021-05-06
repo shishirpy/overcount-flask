@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Counters</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">
+          If the goverment will not give us the correct number.
+          We will count it ourselves.
+      </p>
+    </div>
+  </div>
+  <div class="b-example-divider"></div>
+<form id="form" action="" method="POST">
+    {{ form.hidden_tag() }}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {{ form.infection_count.label }}:
+            {{ form.infection_count() }}
+        </div>
+        <div class="col-6">
+            {{ form.fatality_count.label }}:
+            {{ form.fatality_count() }}
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-center g-5">
+        <div class="col-1 g-5">
+            {{ form.submit() }}
+        </div>
+    </div>
+</form>
+{% endblock %}
