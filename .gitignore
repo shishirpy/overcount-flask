@@ -53,3 +53,9 @@ venv/
 
 # VS Code
 .vscode/
+
+# sqlite db
+*.db
+
+# environment
+.env

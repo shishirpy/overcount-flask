@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">Counters</h1>
+    <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='images/small.png')}}" alt="" width="72" height="72">
+    <h1 class="display-5 fw-bold">Overcount</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">
-          If the goverment will not give us the correct number.
+          If the goverment will not give us the correct numbers.
           We will count it ourselves.
       </p>
     </div>
   </div>
-  <div class="b-example-divider"></div>
 <form id="form" action="" method="POST">
     {{ form.hidden_tag() }}
     <div class="row justify-content-center">
