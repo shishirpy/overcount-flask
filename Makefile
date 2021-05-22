@@ -5,7 +5,7 @@ pipeline-setup-test:
 	pytest ./ --verbose
 
 test:
-	pytest ./
+	pytest app/
 
 verify-style: file-style
 	flake8 ./app --extend-exclude=dist,build,venv --ignore F401,E402,E501 --show-source --statistics
