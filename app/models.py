@@ -5,13 +5,13 @@ from app import db, login
 
 @login.user_loader
 def load_user(id):
-    return User.get(id)
+    return User.query.get(id)
 
 
 class Count(db.Model):
     __tablename__ = "counts"
     id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.Integer)#, db.ForeignKey('users.id'))
+    author_id = db.Column(db.String(120), db.ForeignKey('users.id'))
     inf_count = db.Column('infection_count', db.Integer, nullable=False, default=0)
     fatality_count = db.Column('fatality_count', db.Integer, nullable=False, default=0)
     long = db.Column(db.Float)

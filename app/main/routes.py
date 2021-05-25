@@ -3,7 +3,8 @@ import pprint
 from re import I
 import requests
 from flask import render_template, request, redirect
-from flask import current_app
+from flask import current_app, url_for
+from flask_login import login_user, current_user
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from .. import db
@@ -15,7 +16,11 @@ from . import utils
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
-    if request.method == 'GET':
+    if current_user.is_anonymous:
+        print("CURRENT USER NONE")
+    else:
+        print("CURRENT USER", current_user.email)
+    if request.method == 'POST':
         form = CounterForm()
         print(form.data)
         if request.args.get('locale') == 'hi':
@@ -28,7 +33,7 @@ def index():
                 utils.add_data_to_db(form.data) 
                 return render_template("index.html", form=form)
             return render_template("index.html", form=form)
-    elif request.method == 'POST':
+    elif request.method == 'GET':
         print("POSTR BODY")
         print(request.data)
         form = CounterForm()
@@ -77,8 +82,14 @@ def callback():
         # Invalid token
         pass
 
-    print("USER INFO: ")
-    pprint.pprint(idinfo)
-    print("**" * 40)
-
+    #try:
+    usr = User.query.get(userid)
+    if not usr:
+        new_user = User(id=userid, email=idinfo['email'])
+        utils.add_user_to_db(new_user)
+        print("ADDED NEW USER,", new_user)
+        login_user(new_user)
+    else:
+        login_user(usr)
+    return redirect(url_for('main.index'))
     

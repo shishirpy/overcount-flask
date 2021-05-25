@@ -8,5 +8,6 @@ def make_shell_context():
     return {'db': db, 'User': User, 'Count': Count}
 
 
-app.run(ssl_context="adhoc")
+if __name__ == "__main__":
+   app.run(ssl_context="adhoc")
 
