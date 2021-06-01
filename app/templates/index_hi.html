@@ -4,7 +4,7 @@
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='images/small.png')}}" alt="" width="72" height="72">
 
-    <h1 class="display-5 fw-bold">गड़ना</h1>
+    <h1 class="display-5 fw-bold">Overcount (गड़ना)</h1>
       <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">
         यदि सरकार सही संख्या नहीं बताएगी तो हम स्वयं गिनिती करेंगे |
@@ -25,9 +25,13 @@
     </div>
     <br>
     <div class="row justify-content-center g-5">
+        {% if current_user.is_anonymous %}
+        <button type="button" class="btn btn-primary col-3 g-4" disabled>Sign in to submit</button>
+        {% else %}
         <div class="col-1 g-5">
             {{ form.submit() }}
         </div>
+        {% endif %}
     </div>
 </form>
 {% endblock %}

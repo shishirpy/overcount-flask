@@ -16,13 +16,29 @@ def add_data_to_db(data):
     count = Count(author_id = current_user.id, 
             fatality_count = data.get('fatality_count'),
             inf_count=data.get('infection_count'),
-            lat=data.get('lat'),
-            long=data.get('long'))
+            country=data.get('country'),
+            zipcode=data.get('zipcode'))
+            
+    if data.get('lat'):
+        count.lat=data.get('lat')
+    else:
+        count.lat = None
+
+    if data.get('long'):
+        count.long=data.get('long')
+    else:
+        count.long = None
 
     db.session.add(count)
     db.session.commit()
 
 def add_user_to_db(user):
+    """
+    Parameters
+    ----------------
+    user : db.Model
+        user to be added.
+    """
     db.session.add(user)
     db.session.commit()
 

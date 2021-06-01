@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="circle">{{ counts.fatality }}</div>
+<div class="circle">{{ counts.infection }}</div>
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='images/small.png')}}" alt="" width="72" height="72">
     <h1 class="display-5 fw-bold">Overcount</h1>
@@ -21,6 +23,16 @@
         <div class="col-6">
             {{ form.fatality_count.label }}:
             {{ form.fatality_count() }}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {{ form.country.label }}
+            {{ form.country()}}
+        </div>
+        <div class="col-6">
+            {{ form.zipcode.label }}
+            {{ form.zipcode(size=10) }}
         </div>
     </div>
     <br>

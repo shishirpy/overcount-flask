@@ -8,7 +8,7 @@ from flask_login import login_user, current_user
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from .. import db
-from ..models import Count, User
+from ..models import User, TotalCounts
 from . import bp
 from .forms import CounterForm
 from . import utils
@@ -16,28 +16,26 @@ from . import utils
 
 @bp.route("/", methods=['GET', 'POST'])
 def index():
-    if current_user.is_anonymous:
-        print("CURRENT USER NONE")
-    else:
-        print("CURRENT USER", current_user.email)
+    tot_count = TotalCounts.query.get(1)
     if request.method == 'POST':
         form = CounterForm()
-        print(form.data)
         if request.args.get('locale') == 'hi':
             if form.validate_on_submit():
-                # count = Count(author_id
                 utils.add_data_to_db(form.data)
-            return render_template("index_hi.html", form = form)
+            return render_template("index_hi.html", form=form, counts=tot_count)
         else:
             if form.validate_on_submit():
                 utils.add_data_to_db(form.data) 
-                return render_template("index.html", form=form)
-            return render_template("index.html", form=form)
+                return render_template("index.html", form=form, counts=tot_count)
+            return render_template("index.html", form=form, counts=tot_count)
     elif request.method == 'GET':
-        print("POSTR BODY")
-        print(request.data)
         form = CounterForm()
-        return render_template("index.html", form=form)
+        if request.args.get('locale') == 'hi':
+            return render_template("index_hi.html", form = form, counts=tot_count)
+        else:
+            return render_template("index.html", form=form, counts=tot_count)
+
+
 
 
 @bp.route("/login")

@@ -12,5 +12,6 @@ class CounterForm(FlaskForm):
 
     lat = HiddenField('lat', id="lat")#, validators=[DataRequired()])
     long= HiddenField('long', id="long")#, validators=[DataRequired()])
-    submit = SubmitField(label="Submit", render_kw={"class": "btn btn-primary"})#, "onclick": "onSubmit()"})
-
+    country = SelectField(u'Country', choices=[("INDIA", "INDIA"), ("NEPAL", "NEPAL")], validators=[DataRequired()])
+    zipcode = StringField(u'Pin Code', )
+    submit = SubmitField(label="Submit", render_kw={"class": "btn btn-primary"})

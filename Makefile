@@ -4,6 +4,10 @@ pipeline-setup-test:
 	pip install -r requirements.txt
 	pytest ./ --verbose
 
+dev-setup:
+	python3 -m venv venv
+	source ./venv/bin/activate
+	
 test:
 	pytest app/
 
@@ -18,6 +22,9 @@ verify-update: test verify-style
 coverage:
 	coverage run -m pytest ./app
 	coverage html
+
+run:
+	python overcount.py
 
 clean:
 	rm -rf ./venv
