@@ -1,45 +1,76 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="circle">{{ counts.fatality }}</div>
-<div class="circle">{{ counts.infection }}</div>
-<div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='images/small.png')}}" alt="" width="72" height="72">
-    <h1 class="display-5 fw-bold">Overcount</h1>
-    <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">
-          If the goverment will not give us the correct numbers.
-          We will count it ourselves.
-      </p>
+
+<div class="row" style="height: 100px">
+    <div class="col fs-2">
+        <span class="badge bg-danger">
+            <div>Total Fatality</div>
+            <div class="">{{ counts.fatality }}</div>
+        </span>
     </div>
-  </div>
-<form id="form" action="" method="POST">
-    {{ form.hidden_tag() }}
-    <div class="row justify-content-center">
-        <div class="col-6">
-            {{ form.infection_count.label }}:
-            {{ form.infection_count() }}
-        </div>
-        <div class="col-6">
-            {{ form.fatality_count.label }}:
-            {{ form.fatality_count() }}
-        </div>
+    <div class="col-6"></div>
+    <div class="col fs-2">
+        <span class="badge bg-warning">
+            <div>Total Infections</div>
+            <div>{{ counts.infection }}</div>
+        </span>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-6">
-            {{ form.country.label }}
-            {{ form.country()}}
-        </div>
-        <div class="col-6">
-            {{ form.zipcode.label }}
-            {{ form.zipcode(size=10) }}
+</div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-sm">
+        <div class="px-4 py-5 my-5 text-center">
+            <img class="d-block mx-auto mb-4" src="{{url_for('static', filename='images/small.png')}}" alt="" width="72"
+                height="72">
+            <h1 class="display-5 fw-bold">Overcount</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">
+                    If the goverment will not give us the correct numbers.
+                    We will count it ourselves.
+                </p>
+            </div>
         </div>
     </div>
-    <br>
-    <div class="row justify-content-center g-5">
-        <div class="col-1 g-5">
-            {{ form.submit() }}
-        </div>
+    <div class="col-3"></div>
+</div>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-sm">
+        <form id="form" action="" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.infection_count.label }}:
+                {{ form.infection_count() }}
+            </div>
+            <div class="mb-3">
+                {{ form.fatality_count.label }}:
+                {{ form.fatality_count() }}
+            </div>
+            <div class="row justify-content-center">
+                <div class="mb-3">
+                    {{ form.country.label }}
+                    {{ form.country()}}
+                </div>
+                <div class="mb-3">
+                    {{ form.zipcode.label }}
+                    {{ form.zipcode(size=10) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {% if not current_user.is_anonymous %}
+
+                {{ form.submit() }}
+                {% else %}
+                <div class="g_id_signin form-control center" data-type="standard" data-size="large" data-theme="outline"
+                    data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                </div>
+
+                <button type="button" class="btn btn-primary form-control" disabled>Sign In To Submit</button>
+                {% endif %}
+            </div>
+        </form>
     </div>
-</form>
+    <div class="col-3"></div>
+</div>
 {% endblock %}

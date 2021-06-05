@@ -11,14 +11,13 @@
     <script src={{url_for('static', filename='app.js' ) }}></script>
     <link href={{url_for('static', filename='app.css' ) }} rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- <meta name="google-signin-client_id" content="487537508388-t9006bdaellukhdg0h3om6m5htfd4bep.apps.googleusercontent.com"> -->
 
 
 </head>
 
 <body onload="onLoad()">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light m-0">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Overcount</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -51,31 +50,28 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
-
                 <div id="g_id_onload"
                     data-client_id="487537508388-t9006bdaellukhdg0h3om6m5htfd4bep.apps.googleusercontent.com"
-                    data-login_uri="https://localhost:5000/login/callback"
-                    data-auto_prompt="false">
+                    data-login_uri="https://localhost:5000/login/callback" data-auto_prompt="false"
+                    data-auto_select="true">
                 </div>
-                    <!-- data-callback="handleCredentialResponse">
-                </div> -->
-                <div class="g_id_signin"
-                     data-type="standard" 
-                     data-size="large" 
-                     data-theme="outline"
-                     data-text="sign_in_with" 
-                     data-shape="rectangular" 
-                     data-logo_alignment="left">
-                </div>                
-                <a href="#" onclick="signOut();">Sign out</a>
+                {% if current_user.is_anonymous %}
+                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                    data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                </div>
+                {% else %}
+                <a class="btn btn-primary" href="{{ url_for("main.logout") }}">Sign Out</a>
+                {% endif %}
+
+                <!-- <a href="#" onclick="signOut();">Sign out</a>
                 <script>
-                function signOut() {
-                    var auth2 = gapi.auth2.getAuthInstance();
-                    auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    });
-                }
-                </script>
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            console.log('User signed out.');
+                        });
+                    }
+                </script> -->
             </div>
         </nav>
 

@@ -4,7 +4,7 @@ from re import I
 import requests
 from flask import render_template, request, redirect
 from flask import current_app, url_for
-from flask_login import login_user, current_user
+from flask_login import login_user, login_required, logout_user
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from .. import db
@@ -38,7 +38,7 @@ def index():
 
 
 
-@bp.route("/login")
+@bp.route("/login", methods=["GET", "POST"])
 def login():
     # Find out what URL to hit for Google login
     google_provider_cfg = utils.get_google_provider_cfg()
@@ -90,4 +90,11 @@ def callback():
     else:
         login_user(usr)
     return redirect(url_for('main.index'))
-    
+
+
+
+@bp.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main.index"))
