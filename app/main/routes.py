@@ -22,11 +22,13 @@ def index():
         if request.args.get('locale') == 'hi':
             if form.validate_on_submit():
                 utils.add_data_to_db(form.data)
+                return redirect(url_for("main.index", locale='hi'))
             return render_template("index_hi.html", form=form, counts=tot_count)
         else:
             if form.validate_on_submit():
                 utils.add_data_to_db(form.data) 
-                return render_template("index.html", form=form, counts=tot_count)
+                # return render_template("index.html", form=form, counts=tot_count)
+                return redirect(url_for("main.index"))
             return render_template("index.html", form=form, counts=tot_count)
     elif request.method == 'GET':
         form = CounterForm()
