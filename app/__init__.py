@@ -4,7 +4,13 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from oauthlib.oauth2 import WebApplicationClient
 from config import Config
+import pprint
+import os
 
+
+connect_args = {
+    'ssl_ca': 'ca-certificate.crt'
+}
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -25,5 +31,6 @@ def create_app(config_class=Config):
 
     from .main import bp as bp_main
     app.register_blueprint(bp_main, url_prefix="/")
+
 
     return app

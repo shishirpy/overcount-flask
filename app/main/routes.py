@@ -1,5 +1,3 @@
-import json
-import pprint
 from re import I
 import requests
 from flask import render_template, request, redirect
@@ -7,7 +5,6 @@ from flask import current_app, url_for
 from flask_login import login_user, login_required, logout_user
 from google.oauth2 import id_token
 from google.auth.transport import requests
-from .. import db
 from ..models import User, TotalCounts
 from . import bp
 from .forms import CounterForm
@@ -67,10 +64,6 @@ def callback():
     if not csrf_token_body:
         print("BODY TOKEN MISSING")
 
-    print("TOKENS", csrf_token_cookie, csrf_token_body)
-    print("==" * 20)
-    
-
     token = request.form.get('credential')
     try:
         # Specify the CLIENT_ID of the app that accesses the backend:
@@ -78,7 +71,7 @@ def callback():
 
         # ID token is valid. Get the user's Google Account ID from the decoded token.
         userid = idinfo['sub']
-    except ValueError:
+    except ValueError as e:
         # Invalid token
         pass
 
