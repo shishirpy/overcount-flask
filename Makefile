@@ -32,6 +32,5 @@ run-gunicorn-certs:
 run-gunicorn:
 	gunicorn overcount:app -b "0.0.0.0:5000" -w 4
 
-
 clean:
 	rm -rf ./venv
