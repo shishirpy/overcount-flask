@@ -30,7 +30,7 @@ run-gunicorn-certs:
 	gunicorn --certfile=certs/cert.pem --keyfile=certs/key.pem overcount:app -b "0.0.0.0:5000" -w 4
 
 run-gunicorn:
-	gunicorn overcount:app -b "0.0.0.0:5000" -w 4
+	gunicorn overcount:app -b "0.0.0.0:8080" -w 4
 
 clean:
 	rm -rf ./venv
