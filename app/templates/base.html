@@ -37,7 +37,7 @@
                 </div>
                 <div id="g_id_onload"
                     data-client_id="487537508388-t9006bdaellukhdg0h3om6m5htfd4bep.apps.googleusercontent.com"
-                    data-login_uri="https://localhost:5000/login/callback" data-auto_prompt="false"
+                    data-login_uri="{{ url_for('main.callback') }}" data-auto_prompt="false"
                     data-auto_select="true">
                 </div>
                 {% if current_user.is_anonymous %}
