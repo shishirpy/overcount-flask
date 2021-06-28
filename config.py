@@ -6,8 +6,12 @@ basedir = os.path.dirname(os.path.abspath(__file__))
 load_dotenv()
 class Config(object):
     SECRET_KEY=os.getenv("SECRET_KEY") or "thisisasimplerandom"
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").strip() or \
-        'sqlite:///' + os.path.join(basedir, "app.db")
+
+    if os.environ.get("DATABASE_URL"):
+        SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").strip()
+    else:
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "app.db")
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {
         "connect_args":{
